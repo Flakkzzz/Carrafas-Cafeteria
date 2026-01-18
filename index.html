@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrafas Cafetería | Café de especialidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cian-oscuro: #2a6b7f;
+            --cian-medio: #5ba4b5;
+            --cian-claro: #a3d5e0;
+            --cian-pastel: #d4f1f8;
+            --crema: #f8f5f0;
+            --verde-menta: #a3d6c5;
+            --blanco: #ffffff;
+            --negro: #770c0c22;
+            --sombra: rgba(42, 107, 127, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--negro);
+            background-color: var(--crema);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--cian-oscuro);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header y Navegación */
+        header {
+            background-color: var(--blanco);
+            box-shadow: 0 4px 12px var(--sombra);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            height: 100px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            height: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 80px;
+            gap: 20px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 120px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cian-oscuro);
+            line-height: 1.1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text span {
+            color: var(--cian-claro);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--cian-oscuro);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        nav ul li a:hover {
+            color: var(--cian-claro);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--cian-oscuro);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            /* IMAGEN CAMBIADA - TU IMAGEN Bugambilias 1.png */
+            background: linear-gradient(rgba(42, 107, 127, 0.85), rgba(42, 107, 127, 0.8)), url('Bugambilias 1.png');
+            background-size: cover;
+            background-position: center;
+            color: var(--blanco);
+            padding: 180px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--blanco);
+            margin-top: 0;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--cian-pastel);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--cian-claro);
+            color: var(--cian-oscuro);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--cian-claro);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--cian-claro);
+        }
+        
+        /* Secciones generales */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--cian-claro);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Logo en sección Sobre Nosotros */
+        .about-logo-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .about-logo {
+            height: 200px;
+            width: auto;
+            margin: 0 auto;
+            display: block;
+            opacity: 0.8;
+        }
+        
+        /* Sobre Nosotros */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--sombra);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.03);
+        }
+        
+        /* Especialidades */
+        .specialties {
+            background-color: var(--cian-pastel);
+        }
+        
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .specialty-card {
+            background-color: var(--blanco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--sombra);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .specialty-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .specialty-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .specialty-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .specialty-content {
+            padding: 25px;
+        }
+        
+        .specialty-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .specialty-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--cian-medio);
+            font-size: 1.2rem;
+        }
+        
+        /* Contacto */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            background-color: var(--blanco);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--sombra);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--cian-claro);
+            margin-right: 15px;
+            width: 40px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--cian-oscuro);
+            color: var(--cian-pastel);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .footer-logo-img {
+            height: 160px;
+            width: auto;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--cian-pastel);
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo-text span {
+            color: var(--cian-claro);
+            font-size: 1.8rem;
+        }
+        
+        .footer-links h4,
+        .footer-social h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--cian-claro);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: var(--cian-pastel);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--cian-claro);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--cian-pastel);
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--cian-claro);
+            color: var(--cian-oscuro);
+            transform: scale(1.1);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .logo-img {
+                height: 90px;
+            }
+            
+            .about-logo {
+                height: 150px;
+            }
+            
+            .footer-logo-img {
+                height: 120px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                height: 90px;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background-color: var(--blanco);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 15px var(--sombra);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .hero {
+                padding: 150px 0 100px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            /* Responsive para logo */
+            .logo {
+                height: 70px;
+                gap: 15px;
+            }
+            
+            .logo-img {
+                height: 80px;
+            }
+            
+            .logo-text {
+                font-size: 1.8rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.3rem;
+            }
+            
+            /* Contacto en móviles */
+            .contact-info {
+                padding: 30px 20px;
+            }
+            
+            .footer-logo-img {
+                height: 100px;
+            }
+            
+            .footer-logo-text {
+                font-size: 1.8rem;
+            }
+            
+            .footer-logo-text span {
+                font-size: 1.5rem;
+            }
+            
+            .about-logo {
+                height: 120px;
+            }
+            
+            .social-icons a {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            /* Para móviles muy pequeños */
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem;
+            }
+            
+            .logo-img {
+                height: 70px;
+            }
+            
+            .social-icons a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .about-logo {
+                height: 100px;
+            }
+            
+            .footer-logo-img {
+                height: 80px;
+            }
+            
+            .footer-logo-text {
+                font-size: 1.6rem;
+            }
+            
+            .footer-logo-text span {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header>
+        <div class="container nav-container">
+            <a href="#inicio" class="logo">
+                <!-- LOGO EN EL HEADER (Navegación) -->
+                <img src="Logo Fondo Transparente.png" alt="Logo Carrafas Cafetería" class="logo-img">
+                <div class="logo-text">Carrafas<span>Cafetería</span></div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nuestra Cafetería</a></li>
+                    <li><a href="#especialidades">Especialidades</a></li>
+                    <li><a href="#contacto">Ubicación y Horarios</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Café de calidad en un ambiente único</h1>
+            <p>En Carrafas Cafetería servimos café preparado en máquina con productos de alta calidad, acompañado de deliciosos postres en un ambiente acogedor.</p>
+            <a href="#contacto" class="btn">Visítanos hoy</a>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section id="nosotros">
+        <div class="container">
+            <div class="about-logo-container">
+                <!-- LOGO EN SECCIÓN "SOBRE NOSOTROS" -->
+                <img src="Logo Fondo Transparente.png" alt="Logo Carrafas Cafetería" class="about-logo">
+            </div>
+            <h2 class="section-title">Nuestra Cafetería</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Un lugar para disfrutar buenos momentos</h2>
+                    <p>Carrafas Cafetería es un espacio donde la comunidad puede reunirse a disfrutar de un buen café y compartir momentos especiales. Nos enfocamos en ofrecer productos de calidad preparados con dedicación.</p>
+                    <p>Nuestro café se prepara en máquina utilizando granos seleccionados para garantizar un sabor consistente y delicioso en cada taza. Creemos que un buen café no necesita complicaciones, sino ingredientes de calidad y preparación cuidadosa.</p>
+                    <p>Además de nuestro café, ofrecemos una variedad de batidos, sandwiches, postres y tortas, todo preparado con ingredientes frescos para satisfacer todos los gustos.</p>
+                </div>
+                <div class="about-image">
+                    <img src="Atardecer plantas y mesa.png" alt="Interior de Carrafas Cafetería">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Especialidades -->
+    <section class="specialties" id="especialidades">
+        <div class="container">
+            <h2 class="section-title">Nuestras Especialidades</h2>
+            <div class="specialties-grid">
+                <div class="specialty-card">
+                    <div class="specialty-img">
+                        <!-- IMAGEN - BATIDOS Y MILKSHAKES -->
+                        <img src="https://images.unsplash.com/photo-1577805947697-89e18249d767?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1758&q=80" alt="Batidos y Milkshakes">
+                    </div>
+                    <div class="specialty-content">
+                        <h3>Variedad de Batidos y Milkshakes</h3>
+                        <p>Refrescantes batidos de frutas naturales y cremosos milkshakes en diversos sabores. Perfectos para acompañar tu visita o para disfrutar en cualquier momento.</p>
+                        <div class="price">Desde $x.xxx</div>
+                    </div>
+                </div>
+                
+                <div class="specialty-card">
+                    <div class="specialty-img">
+                        <!-- IMAGEN - SANDWICH ESPECIAL -->
+                        <img src="https://images.unsplash.com/photo-1481070555726-e2fe8357725c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Sandwich Carrafas Mechada">
+                    </div>
+                    <div class="specialty-content">
+                        <h3>Carrafas Mechada</h3>
+                        <p>Nuestro sandwich especial: Pan Ciabatta artesanal con queso derretido, rúcula fresca, carne mechada jugosa y champiñones salteados. Una explosión de sabores.</p>
+                        <div class="price">$x.xxx</div>
+                    </div>
+                </div>
+                
+                <div class="specialty-card">
+                    <div class="specialty-img">
+                        <!-- IMAGEN - POSTRES Y TORTAS -->
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1789&q=80" alt="Postres y Tortas">
+                    </div>
+                    <div class="specialty-content">
+                        <h3>Postres y Tortas Variadas</h3>
+                        <p>Selección de postres artesanales y tortas frescas diariamente. Desde cheesecakes hasta tortas de chocolate, siempre hay algo dulce para complementar tu café.</p>
+                        <div class="price">Desde $x.xxx</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <div class="container">
+            <h2 class="section-title">Visítanos</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Información y Horarios</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Dirección</h4>
+                            <p style="color: black;">Juan Rojas Maldonado (ex Teniente Bello) #298<br>Puente Alto, Región Metropolitana</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Horario de Atención</h4>
+                            <p style="color: black;"><strong>Lunes a Viernes:</strong> 9:30 AM - 8:00 PM<br>
+                               <strong>Sábados:</strong> 10:00 AM - 8:00 PM<br>
+                               <strong>Domingos:</strong> Cerrado</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-mug-hot"></i>
+                        </div>
+                        <div>
+                            <h4>Nuestro Café</h4>
+                            <p style="color: black;">Preparado en máquina con granos seleccionados de calidad. Ofrecemos diversas preparaciones para todos los gustos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo-container">
+                    <!-- LOGO EN EL FOOTER -->
+                    <img src="Logo Fondo Transparente.png" alt="Logo Carrafas Cafetería" class="footer-logo-img">
+                    <div class="footer-logo-text">Carrafas<span>Cafetería</span></div>
+                    <p>Un espacio acogedor en Puente Alto para disfrutar de buen café, deliciosos sandwiches y postres frescos. ¡Te esperamos!</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Enlaces rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#nosotros">Nuestra Cafetería</a></li>
+                        <li><a href="#especialidades">Especialidades</a></li>
+                        <li><a href="#contacto">Ubicación y Horarios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Síguenos en Instagram</h4>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/carrafas.cafeteria/" target="_blank" title="Síguenos en Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 1rem;">@carrafas.cafeteria</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Carrafas Cafetería. Todos los derechos reservados. | Puente Alto, Santiago</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // Cambiar icono del botón
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+        
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
